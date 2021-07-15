@@ -2,8 +2,10 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbyfWZRBOkYbt7Gn9Oo9jU
 const form = document.forms['google-sheet']
           
             form.addEventListener('submit', e => {
-              e.preventDefault()
+              e.preventDefault();
+              
               fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => alert("Gracias por contactarnos, en breve nos pondremos en contacto con usted..."))
+                .then(response => swal("Mensaje enviado!", "En breve nos estaremos contactando con usted!", "success"))
+                .then( response => document.getElementById('my-form').reset())
                 .catch(error => console.error('Error!', error.message))
             })
